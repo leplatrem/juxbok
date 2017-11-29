@@ -7,8 +7,19 @@
 <body>
   <div class="main tabs">
 
+    <div class="tab tab-welcome">
+        <input type="radio" id="tab-0" name="tab-group-1" checked>
+        <label for="tab-0">Welcome</label>
+
+        <div class="content">
+          <h1>Juxbok</h1>
+          <p>Scan cards QR codes to play videos</p>
+          <p><a href="#player">Start !</a></p>
+        </div>
+    </div>
+
     <div class="tab tab-player">
-      <input type="radio" id="tab-1" name="tab-group-1" checked>
+      <input type="radio" id="tab-1" name="tab-group-1">
       <label for="tab-1">Player</label>
 
       <div class="content">
@@ -31,10 +42,11 @@
 
     <div class="tab tab-print">
         <input type="radio" id="tab-2" name="tab-group-1">
-        <label for="tab-2">Print cards</label>
+        <label for="tab-2">Cards</label>
 
         <div class="content">
-          Coming soon
+          <p>Put your Youtube URLs and <button id="btn-print">Print 🖶</button></p>
+          <form id="form-print"></form>
         </div>
     </div>
 
@@ -43,23 +55,35 @@
         <label for="tab-3">Help</label>
 
         <div class="content">
-          <section>
-            <h2>What is this?</h2>
-            <p>It's like a jukebox. Songs are Youtube URLs, printed on paper as QR codes.</p>
-            <p>In order to play a song, scan the QR code in front a camera.</p>
-          </section>
+          <div>
+            <section>
+              <h2>What is this?</h2>
+              <p>It's like a jukebox. Songs are Youtube URLs, printed on paper as QR codes.</p>
+              <p>In order to play a song, scan the QR code in front the camera.</p>
+            </section>
 
-          <section>
-            <h2>Why?</h2>
-            <p>For fun. And kids can use it!</p>
-            <p>Songs back on physical objects! Collect cards, trade them :)</p>
-          </section>
+            <section>
+              <h2>Why?</h2>
+              <p>For fun :)</p>
+              <p>Your favorite songs are back on physical objects! Print your own cards, collect them, trade them :)</p>
+              <p>Kids can use it! So do your party friends at 3AM!</p>
+            </section>
+
+            <section>
+              <h2>About</h2>
+              <p>Besides the video stream, everything happens locally in the browser.</p>
+              <p>This wouldn't have be feasible without the awesome <a href="https://github.com/schmich/instascan/">Instascan</a> library.</p>
+              <p><a href="https://github.com/leplatrem/juxbok">Source code is on Github</a></p>
+            </section>
+          </div>
         </div>
     </div>
   </div>
 
   <script type="text/javascript" src="https://cdn.plyr.io/2.0.18/plyr.js"></script>
   <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/36ad50f00971/instascan.min.js"></script>
+  <script type="text/javascript" src="https://rawgit.com/kazuhikoarase/qrcode-generator/613014ec025e19b69/js/qrcode.js"></script>
   <script type="text/javascript" src="script.js"></script>
+  <script type="text/javascript" src="print.js"></script>
 </body>
 </html>
