@@ -16,9 +16,14 @@ html, body {
   font-size: 2em;
 }
 
+.tab .content {
+  justify-items: center;
+}
+
 .tab-player .content {
   grid-template-columns: 7fr 1fr;
   grid-template-rows: 1fr 2fr;
+  justify-items: stretch;
 }
 
 .player {
@@ -158,7 +163,6 @@ html, body {
 
 .tab [type=radio]:checked ~ .content {
   display: grid;
-  justify-items: center;
 }
 
 [type=radio]:checked ~ label {
