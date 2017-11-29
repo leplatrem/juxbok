@@ -10,7 +10,6 @@ class Player {
   async init() {
     const players = plyr.setup(this.el, {
       controls: ['play-large'],
-      debug: true,
     });
     this.plyr = players[0];
     this.plyr.on('ended', () => this.playNext());
@@ -101,33 +100,43 @@ async function url2video(url) {
   return {id, title, type: 'youtube', date: Date.now()};
 }
 
+class Playlist {
+  constructor(player) {
+    this.player = player;
+    this.el = document.querySelector('#playlist');
+  }
+
+  render() {
+    const queue = this.player.queue;
+    const nextBtn = this.el.querySelector('#next');
+    const list = this.el.querySelector('ul');
+    if (queue.length == 0) {
+      list.innerHTML = '<li class="empty">Empty playlist</li>';
+      nextBtn.setAttribute('disabled', 'disabled');
+      return;
+    }
+    list.innerHTML = '';
+    nextBtn.removeAttribute('disabled');
+
+    for(const video of queue) {
+      const li = document.createElement('li');
+
+      const preview = document.createElement('img');
+      preview.setAttribute('src', `https://img.youtube.com/vi/${video.id}/default.jpg`);
+      li.appendChild(preview);
+
+      const removeBtn = document.createElement('button');
+      removeBtn.innerText = '✖';
+      removeBtn.addEventListener('click', () => this.player.remove(video));
+      li.appendChild(removeBtn);
+
+      list.appendChild(li);
+    }
+  }
+}
+
 async function main() {
   const player = new Player();
-
-  new Vue({
-    el: '#playlist',
-    data: {
-      videos: []
-    },
-    mounted() {
-      player.addEventListener('enqueue', (e) => {
-        this.videos.push({...e.detail});
-      });
-      player.addEventListener('dequeue', (e) => {
-        this.videos.shift();
-      });
-    },
-    methods: {
-      next() {
-        player.playNext();
-      },
-      remove(video) {
-        player.remove(video);
-        this.videos = this.videos.filter((v) => v.id != video.id);
-      }
-    }
-  });
-
   await player.init();
 
   const scanner = new Scanner();
@@ -136,6 +145,11 @@ async function main() {
     player.enqueue(e.detail);
   });
   await scanner.start();
+
+  const playlist = new Playlist(player);
+  playlist.render();
+  player.addEventListener('enqueue', () => playlist.render());
+  player.addEventListener('dequeue', () => playlist.render());
 }
 
 function flash() {

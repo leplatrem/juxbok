@@ -5,35 +5,61 @@
   <link rel="stylesheet" href="style.css"></link>
 </head>
 <body>
-  <div class="container">
-    <div class="player">
-        <video id="player-view"></video>
-    </div>
+  <div class="main tabs">
 
-    <div class="scanner">
-      <video id="scanner-view"></video>
-    </div>
+    <div class="tab tab-player">
+      <input type="radio" id="tab-1" name="tab-group-1" checked>
+      <label for="tab-1">Player</label>
 
-    <div id="playlist">
-      <h2>Playlist</h2>
-      <div class="controls">
-        <button id="next" @click.stop="next">⏭</button>
+      <div class="content">
+        <div class="player">
+            <video id="player-view"></video>
+        </div>
+
+        <div class="scanner">
+          <video id="scanner-view"></video>
+        </div>
+
+        <div id="playlist">
+          <div class="controls">
+            <button id="next">Skip ⏭</button>
+          </div>
+          <ul></ul>
+        </div>
       </div>
-      <ul v-if="videos.length === 0">
-        <li class="empty">Empty</li>
-      </ul>
-      <transition-group name="videos" tag="ul">
-        <li v-for="video in videos" :key="video.date" :title="video.title">
-          <img :src="'https://img.youtube.com/vi/' + video.id + '/default.jpg'"/>
-          <button class="remove" @click.stop="remove(video)">✖</button>
-        </li>
-      </transition-group>
+    </div>
+
+    <div class="tab tab-print">
+        <input type="radio" id="tab-2" name="tab-group-1">
+        <label for="tab-2">Print cards</label>
+
+        <div class="content">
+          Coming soon
+        </div>
+    </div>
+
+    <div class="tab tab-help">
+        <input type="radio" id="tab-3" name="tab-group-1">
+        <label for="tab-3">Help</label>
+
+        <div class="content">
+          <section>
+            <h2>What is this?</h2>
+            <p>It's like a jukebox. Songs are Youtube URLs, printed on paper as QR codes.</p>
+            <p>In order to play a song, scan the QR code in front a camera.</p>
+          </section>
+
+          <section>
+            <h2>Why?</h2>
+            <p>For fun. And kids can use it!</p>
+            <p>Songs back on physical objects! Collect cards, trade them :)</p>
+          </section>
+        </div>
     </div>
   </div>
 
   <script type="text/javascript" src="https://cdn.plyr.io/2.0.18/plyr.js"></script>
   <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/36ad50f00971/instascan.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
   <script type="text/javascript" src="script.js"></script>
 </body>
 </html>

@@ -1,15 +1,21 @@
 html, body {
   margin: 0;
   padding: 0;
+  background: black;
+  color: #aaa;
+  font-family: sans-serif;
 }
 
-.container {
+.main {
+  width: 100vw;
+  height: 100vh;
+  font-size: 2em;
+}
+
+.tab-player .content {
   display: grid;
   grid-template-columns: 7fr 1fr;
   grid-template-rows: 1fr 2fr;
-  width: 100vw;
-  height: 100vh;
-  background-color: black;
 }
 
 .player {
@@ -22,6 +28,7 @@ html, body {
   grid-column: 2;
   grid-row: 2;
   overflow: auto;
+  margin-top: 20px;
 }
 
 #playlist ul {
@@ -86,3 +93,55 @@ html, body {
   top: 0; bottom: 0; left: 0; right: 0;
   animation: flash ease-out 1s;
 }
+
+
+/* <Tabs> */
+/* https://css-tricks.com/functional-css-tabs-revisited/ */
+.tabs {
+  position: relative;
+  clear: both;
+}
+.tab {
+  float: left;
+}
+.tab label {
+  padding: 0.5em;
+  margin-left: 5px;
+  position: relative;
+  color: white;
+}
+
+.content {
+  position: absolute;
+  top: 1.5em;
+  left: 0;
+  right: 0;
+  /* bottom: 0;*/
+}
+
+.tab [type=radio] {
+  display: none;
+}
+
+.tab [type=radio] ~ .content {
+  display: none;
+}
+
+.tab [type=radio]:checked ~ .content {
+  display: grid;
+}
+
+[type=radio]:checked ~ label {
+  background: white;
+  color: black;
+}
+
+.tab label:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+[type=radio]:checked ~ label:hover {
+  text-decoration: none;
+}
+/* </Tabs> */
