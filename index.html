@@ -1,0 +1,39 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://cdn.plyr.io/2.0.18/plyr.css">
+  <link rel="stylesheet" href="style.css"></link>
+</head>
+<body>
+  <div class="container">
+    <div class="player">
+        <video id="player-view"></video>
+    </div>
+
+    <div class="scanner">
+      <video id="scanner-view"></video>
+    </div>
+
+    <div id="playlist">
+      <h2>Playlist</h2>
+      <div class="controls">
+        <button id="next" @click.stop="next">⏭</button>
+      </div>
+      <ul v-if="videos.length === 0">
+        <li class="empty">Empty</li>
+      </ul>
+      <transition-group name="videos" tag="ul">
+        <li v-for="video in videos" :key="video.date" :title="video.title">
+          <img :src="'https://img.youtube.com/vi/' + video.id + '/default.jpg'"/>
+          <button class="remove" @click.stop="remove(video)">✖</button>
+        </li>
+      </transition-group>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="https://cdn.plyr.io/2.0.18/plyr.js"></script>
+  <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/36ad50f00971/instascan.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
+  <script type="text/javascript" src="script.js"></script>
+</body>
+</html>
