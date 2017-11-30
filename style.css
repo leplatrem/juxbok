@@ -1,3 +1,7 @@
+:root {
+  --menu-height: 100px;
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -11,12 +15,8 @@ html, body {
 }
 
 .main {
-  width: 100vw;
+  width: calc(100vw - (100vw - 100%)); /* 100% - scrollbar */
   height: 100vh;
-  max-width: 100vw;
-  max-height: 100vh;
-  overflow: hidden;
-
   font-size: 2em;
 }
 
@@ -26,6 +26,8 @@ button {
 
 .tab .content {
   justify-items: center;
+  max-height: calc(100% - var(--menu-height));
+  overflow: auto;
 }
 
 .tab-player .content {
@@ -137,6 +139,7 @@ button {
 
 .tab-print form > .valid {
   border: solid 1px black;
+  border-radius: 10px;
 }
 
 .tab-print form > div > div {
@@ -162,7 +165,7 @@ button {
 
 .content {
   position: absolute;
-  top: 2em;
+  top: var(--menu-height);
   left: 0;
   right: 0;
 }
