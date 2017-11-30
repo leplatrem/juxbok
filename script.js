@@ -60,7 +60,7 @@ class Player {
     this.plyr.on('ended', () => this.playNext());
     // Play next when error occurs.
     this.plyr.on('error', (e) => {
-      console.error(e);
+      console.error('skip, will play next', e);
       this.playNext();
     });
   }

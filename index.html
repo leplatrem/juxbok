@@ -26,11 +26,9 @@
         <div class="player">
             <video id="player-view"></video>
         </div>
-
         <div class="scanner">
           <video id="scanner-view"></video>
         </div>
-
         <div id="playlist">
           <div class="controls">
             <button id="next">Skip ⏭</button>
@@ -52,7 +50,7 @@
 
     <div class="tab tab-help">
         <input type="radio" id="tab-3" name="tab-group-1">
-        <label for="tab-3">Help</label>
+        <label for="tab-3">?</label>
 
         <div class="content">
           <div>
@@ -61,19 +59,22 @@
               <p>It's like a jukebox. Songs are Youtube URLs, printed on paper as QR codes.</p>
               <p>In order to play a song, scan the QR code in front the camera.</p>
             </section>
-
             <section>
               <h2>Why?</h2>
               <p>For fun :)</p>
               <p>Your favorite songs are back on physical objects! Print your own cards, collect them, trade them :)</p>
               <p>Kids can use it! So do your party friends at 3AM!</p>
             </section>
-
+            <section>
+              <h2>It does not work!</h2>
+              <p>Check out the browser console, or try again with <a href="https://getfirefox.com">a modern browser</a>!</p>
+              <p>Also, some Youtube videos are restricted and cannot be played from external websites like this one.</p>
+            </section>
             <section>
               <h2>About</h2>
-              <p>Besides the video stream, everything happens locally in the browser.</p>
+              <p>Besides the video stream, everything happens locally in the browser, in JavaScript.</p>
               <p>This wouldn't have be feasible without the awesome <a href="https://github.com/schmich/instascan/">Instascan</a> library.</p>
-              <p><a href="https://github.com/leplatrem/juxbok">Source code is on Github</a></p>
+              <p>Source code is public domain. <a href="https://github.com/leplatrem/juxbok/">Check it out!</a></p>
             </section>
           </div>
         </div>

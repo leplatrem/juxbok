@@ -13,7 +13,15 @@ html, body {
 .main {
   width: 100vw;
   height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  overflow: hidden;
+
   font-size: 2em;
+}
+
+button {
+  font-size: 1em;
 }
 
 .tab .content {
@@ -21,31 +29,36 @@ html, body {
 }
 
 .tab-player .content {
-  grid-template-columns: 7fr 1fr;
-  grid-template-rows: 1fr 2fr;
+  grid-gap: 10px;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr;
   justify-items: stretch;
 }
 
 .player {
   grid-column: 1;
   grid-row: 1 / 3;
-  max-height: 100%;
 }
 
 #playlist {
   grid-column: 2;
   grid-row: 2;
-  overflow: auto;
-  margin-top: 20px;
+  max-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  margin-top: 1em;
 }
 
 #playlist ul {
   padding-left: 0;
+  max-width: 380px;
 }
 
 #playlist li {
   list-style: none;
   display: flex;
+  align-items: center;
   margin-bottom: 10px;
 }
 
@@ -68,7 +81,7 @@ html, body {
 
 @keyframes scanner {
   from { background-position: center -10%; }
-  to { background-position: center 80%; }
+  to { background-position: center 100%; }
 }
 
 .scanner::after {
@@ -138,7 +151,8 @@ html, body {
   clear: both;
 }
 .tab {
-  float: left;
+  display: table-cell;
+  vertical-align: middle;
 }
 .tab label {
   padding: 0.5em;
