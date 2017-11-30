@@ -31,7 +31,7 @@ async function setupPrint() {
     "https://youtu.be/o53sNZVcu-4",
     "https://www.youtube.com/watch?v=ibwbd70QYiw",
     "https://www.youtube.com/watch?v=Wg4FzviEb_s",
-    "https://www.youtube.com/watch?v=PWoDSGfSu6o",
+    "https://www.youtube.com/watch?v=ZnpsvoQ8p0o",
   ];
   const fields = form.querySelectorAll('input');
   samples.forEach((v, i) => {

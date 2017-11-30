@@ -1,16 +1,14 @@
 window.addEventListener('load', main);
 
 async function main() {
-  const playerDiv = document.getElementById('player-view');
-  const playlistDiv = document.getElementById('playlist');
-  const scannerDiv = document.getElementById('scanner-view');
+  const player = new Player();
 
-  const player = new Player(playerDiv);
-
-  const playlist = new Playlist(playlistDiv, player);
+  const playlist = new Playlist();
   playlist.render(player.queue);
+
   player.addEventListener('enqueue', () => playlist.render(player.queue));
   player.addEventListener('dequeue', () => playlist.render(player.queue));
+  playlist.addEventListener('next', () => player.playNext());
   playlist.addEventListener('remove', (e) => {
     player.remove(e.detail);
     playlist.render(player.queue);
@@ -18,10 +16,8 @@ async function main() {
 
   await player.init();
 
-  const scanner = new Scanner(scannerDiv, { scanPeriod: 5 });
+  const scanner = new Scanner({ scanPeriod: 5 });
   scanner.addEventListener('scan', (e) => {
-    // Flash effect
-    flash(scannerDiv.parentNode);
     // Enqueue URL in player
     player.enqueue(e.detail);
   });
@@ -40,8 +36,8 @@ window.addEventListener('hashchange', (e) => {
  */
 
 class Player {
-  constructor(el) {
-    this.el = el;
+  constructor() {
+    this.el = document.getElementById('player-view');
     // Use its DOM element to dispatch events.
     this.addEventListener = this.el.addEventListener.bind(this.el);
 
@@ -115,8 +111,8 @@ class Player {
 }
 
 class Scanner {
-  constructor(el, options) {
-    this.el = el;
+  constructor(options) {
+    this.el = document.getElementById('scanner-view');
     // Use its DOM element to dispatch events.
     this.addEventListener = this.el.addEventListener.bind(this.el);
 
@@ -125,6 +121,8 @@ class Scanner {
       try {
         const video = await url2video(url);
         this.el.dispatchEvent(new CustomEvent('scan', { detail: video }));
+        // Flash effect
+        flash(this.el.parentNode);
       } catch (e) {
         console.error(e);
       }
@@ -142,22 +140,27 @@ class Scanner {
 }
 
 class Playlist {
-  constructor(el) {
-    this.el = el;
+  constructor() {
+    this.el = document.getElementById('playlist');
     // Use its DOM element to dispatch events.
     this.addEventListener = this.el.addEventListener.bind(this.el);
+
+    this.nextBtn = this.el.querySelector('#next');
+    this.nextBtn.addEventListener('click', () => {
+      this.el.dispatchEvent(new CustomEvent('next'));
+    });
   }
 
   render(queue) {
-    const nextBtn = this.el.querySelector('#next');
     const list = this.el.querySelector('ul');
     if (queue.length == 0) {
+      this.nextBtn.setAttribute('disabled', 'disabled');
       list.innerHTML = '<li class="empty">Empty playlist</li>';
-      nextBtn.setAttribute('disabled', 'disabled');
       return;
     }
+
     list.innerHTML = '';
-    nextBtn.removeAttribute('disabled');
+    this.nextBtn.removeAttribute('disabled');
 
     for(const video of queue) {
       const li = document.createElement('li');
