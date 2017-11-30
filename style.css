@@ -202,11 +202,20 @@ button {
  * Print stylesheet.
  */
 @media print {
-  .tab label, #btn-print {
+   body {
+    zoom: 50%;
+   }
+
+   @page {
+      margin: 0.5cm;
+      size: A4 portrait;
+   }
+
+  .tab label, .tab-print .content > p {
     display: none;
   }
 
-  .tab-print .content {
+  .content {
     top: 0;
   }
 
