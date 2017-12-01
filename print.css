@@ -1,0 +1,29 @@
+/*
+ * Print stylesheet.
+ */
+@media print {
+   body {
+    zoom: 50%;
+   }
+
+   @page {
+      margin: 0.5cm;
+      size: A4 portrait;
+   }
+
+  .tab label, .tab-print .content > p {
+    display: none;
+  }
+
+  .content {
+    top: 0;
+  }
+
+  .tab-print form {
+    margin: 0;
+  }
+
+  .tab-print form input {
+    display: none;
+  }
+}
