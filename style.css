@@ -1,5 +1,5 @@
 :root {
-  --menu-height: 100px;
+  --menu-height: 70px;
 }
 
 html, body {
@@ -24,11 +24,64 @@ button {
   font-size: 1em;
 }
 
-.tab .content {
-  justify-items: center;
-  max-height: calc(100% - var(--menu-height));
-  overflow: auto;
+/* <Tabs> */
+/* https://css-tricks.com/functional-css-tabs-revisited/ */
+.tabs {
+  position: relative;
+  clear: both;
 }
+
+.tab {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.tab label {
+  padding: 0.5em;
+  line-height: 2.0;
+  color: white;
+  max-height: var(--menu-height);
+}
+
+.tab .content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: var(--menu-height);
+  justify-items: center;
+
+  max-height: calc(100% - var(--menu-height));
+  overflow-x: hidden;
+}
+
+.tab [type=radio] {
+  display: none;
+}
+
+.tab [type=radio] ~ .content {
+  display: none;
+}
+
+.tab [type=radio]:checked ~ .content {
+  display: grid;
+}
+
+[type=radio]:checked ~ label {
+  background: white;
+  color: black;
+}
+
+.tab label:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+[type=radio]:checked ~ label:hover {
+  text-decoration: none;
+}
+/* </Tabs> */
+
 
 .tab-player .content {
   grid-gap: 10px;
@@ -146,53 +199,3 @@ button {
   flex-grow: 1;
   text-align: center;
 }
-
-/* <Tabs> */
-/* https://css-tricks.com/functional-css-tabs-revisited/ */
-.tabs {
-  position: relative;
-  clear: both;
-}
-.tab {
-  display: table-cell;
-  vertical-align: middle;
-}
-.tab label {
-  padding: 0.5em;
-  line-height: 2.0;
-  color: white;
-}
-
-.content {
-  position: absolute;
-  top: var(--menu-height);
-  left: 0;
-  right: 0;
-}
-
-.tab [type=radio] {
-  display: none;
-}
-
-.tab [type=radio] ~ .content {
-  display: none;
-}
-
-.tab [type=radio]:checked ~ .content {
-  display: grid;
-}
-
-[type=radio]:checked ~ label {
-  background: white;
-  color: black;
-}
-
-.tab label:hover {
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-[type=radio]:checked ~ label:hover {
-  text-decoration: none;
-}
-/* </Tabs> */
