@@ -1,15 +1,24 @@
 /*
  * Print stylesheet.
  */
-@media print {
-   body {
-    zoom: 50%;
-   }
 
-   @page {
-      margin: 0.5cm;
-      size: A4 portrait;
-   }
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+  html, body {
+    width: 210mm;
+    height: 297mm;
+    background-color: white;
+  }
+
+  .main {
+    zoom: 45%;
+    min-width: 420mm;
+    min-height: 600mm;
+  }
 
   .tab label, .tab-print .content > p {
     display: none;
